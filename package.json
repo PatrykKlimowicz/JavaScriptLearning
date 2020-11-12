@@ -1,0 +1,35 @@
+{
+    "name": "recipe-app",
+    "version": "1.0.0",
+    "description": "This is project created for learning purposes",
+    "main": "index.html",
+    "scripts": {
+        "start": "parcel index.html",
+        "build": "parcel build index.html"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PatrykKlimowicz/JavaScriptLearning.git"
+    },
+    "keywords": [
+        "js",
+        "javascript",
+        "learning",
+        "learn"
+    ],
+    "author": "Patryk Klimowicz",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/PatrykKlimowicz/JavaScriptLearning/issues"
+    },
+    "homepage": "https://github.com/PatrykKlimowicz/JavaScriptLearning#readme",
+    "devDependencies": {
+        "parcel": "^2.0.0-nightly.442",
+        "sass": "^1.29.0"
+    },
+    "dependencies": {
+        "core-js": "^3.7.0",
+        "fractional": "^1.0.0",
+        "regenerator-runtime": "^0.13.7"
+    }
+}
