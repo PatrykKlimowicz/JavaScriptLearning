@@ -3,12 +3,9 @@ import recipeView from "./views/recipeView.js";
 
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+import searchView from "./views/searchView.js";
 
-const recipeContainer = document.querySelector(".recipe");
-
-// API DOCS PATH: https://forkify-api.herokuapp.com/v2
-
-const controllRecipes = async function () {
+const controlRecipes = async function () {
     try {
         // render loadig spinner
         recipeView.renderSpinner();
@@ -30,8 +27,20 @@ const controllRecipes = async function () {
     }
 };
 
-// Publisher - subscriber pattern
+const controlSearchResults = async function () {
+    try {
+        const query = searchView.getQuery();
+        if (!query) return;
+
+        await model.loadSearchResults(query);
+
+        console.log(model.state);
+    } catch (error) {}
+};
+
+// Publisher - subscriber pattern. Nicely connect view and controller
 const init = function () {
-    recipeView.addHandlerRender(controllRecipes);
+    recipeView.addHandlerRender(controlRecipes);
+    searchView.addHandlerSearch(controlSearchResults);
 };
 init();
