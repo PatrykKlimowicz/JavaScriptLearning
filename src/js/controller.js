@@ -30,5 +30,8 @@ const controllRecipes = async function () {
     }
 };
 
-const events = ["hashchange", "load"];
-events.forEach((ev) => window.addEventListener(ev, controllRecipes));
+// Publisher - subscriber pattern
+const init = function () {
+    recipeView.addHandlerRender(controllRecipes);
+};
+init();
