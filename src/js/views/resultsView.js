@@ -7,7 +7,6 @@ class ResultsView extends View {
     _successMsg = "";
 
     _generateMarkup() {
-        console.log(this._data);
         return this._data
             .map(
                 (recipe) =>
