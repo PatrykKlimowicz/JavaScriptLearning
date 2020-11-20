@@ -1,2 +1,4 @@
 node_modules
-.parcel_cache
+*cache
+dist
+*lock.json
