@@ -45,12 +45,13 @@ export const loadSearchResults = async function (query) {
                 image: rec.image_url,
             };
         });
+        state.search.page = 1;
     } catch (error) {
         throw error;
     }
 };
 
-export const getSearchResultsPage = function (page = 1) {
+export const getSearchResultsPage = function (page = state.search.page) {
     state.search.page = page;
 
     let start = (state.search.page - 1) * state.search.resultsPerPage;
