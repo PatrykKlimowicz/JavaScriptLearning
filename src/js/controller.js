@@ -67,10 +67,20 @@ const controlServings = function (numServings) {
     recipeView.update(model.state.recipe);
 };
 
+const controlAddBookmark = function () {
+    // Add or remove bookmarks
+    if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+    else model.deleteBookmark(model.state.recipe.id);
+
+    // update UI
+    recipeView.update(model.state.recipe);
+};
+
 // Publisher - subscriber pattern. Nicely connect view and controller
 const init = function () {
     recipeView.addHandlerRender(controlRecipes);
     recipeView.addHandlerUpdateServings(controlServings);
+    recipeView.addHandlerBookamrk(controlAddBookmark);
     searchView.addHandlerSearch(controlSearchResults);
     paginationView.addHandlerClick(controlChangePage);
 };
