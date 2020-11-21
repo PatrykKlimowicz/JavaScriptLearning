@@ -10,13 +10,15 @@ import paginationView from "./views/paginationView.js";
 const controlRecipes = async function () {
     try {
         // render loadig spinner
-        // recipeView.renderSpinner();
+        recipeView.renderSpinner();
 
         // get recipe id
         const id = window.location.hash.slice(1);
 
         if (!id) return;
-        // test id: 5ed6604591c37cdc054bc886
+
+        // mark current opened recipe as active
+        resultsView.update(model.getSearchResultsPage());
 
         // load recipe
         await model.loadRecipe(id);
@@ -62,7 +64,7 @@ const controlServings = function (numServings) {
     model.updateServings(numServings);
 
     // Update the recipe view
-    recipeView.render(model.state.recipe);
+    recipeView.update(model.state.recipe);
 };
 
 // Publisher - subscriber pattern. Nicely connect view and controller

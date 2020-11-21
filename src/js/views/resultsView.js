@@ -7,12 +7,14 @@ class ResultsView extends View {
     _successMsg = "";
 
     _generateMarkup() {
+        const id = window.location.hash.slice(1);
+
         return this._data
             .map(
                 (recipe) =>
                     `
             <li class="preview">
-                <a class="preview__link" href="#${recipe.id}">
+                <a class="preview__link ${recipe.id === id ? "preview__link--active" : ""}" href="#${recipe.id}">
                 <figure class="preview__fig">
                     <img src="${recipe.image}" alt="Test" />
                 </figure>
