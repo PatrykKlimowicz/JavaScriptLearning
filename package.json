@@ -24,12 +24,12 @@
     },
     "homepage": "https://github.com/PatrykKlimowicz/JavaScriptLearning#readme",
     "devDependencies": {
-        "parcel": "^2.0.0-nightly.442",
+        "parcel": "^2.0.0-nightly.454",
         "sass": "^1.29.0"
     },
     "dependencies": {
-        "core-js": "^3.7.0",
         "fractional": "^1.0.0",
+        "core-js": "^3.7.0",
         "regenerator-runtime": "^0.13.7"
     }
 }

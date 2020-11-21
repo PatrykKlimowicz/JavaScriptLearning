@@ -11,6 +11,19 @@ class RecipeView extends View {
         ["hashchange", "load"].forEach((ev) => window.addEventListener(ev, handler));
     }
 
+    addHandlerUpdateServings(handler) {
+        this._parentEl.addEventListener("click", function (e) {
+            const btn = e.target.closest(".btn--update-servings");
+
+            if (!btn) return;
+
+            const updateTo = +btn.dataset.updateTo;
+            console.log("asd");
+            console.log(updateTo);
+            handler(updateTo);
+        });
+    }
+
     _generateMarkup() {
         return `
 			<figure class="recipe__fig">
@@ -36,12 +49,12 @@ class RecipeView extends View {
 					<span class="recipe__info-text">servings</span>
 
 					<div class="recipe__info-buttons">
-						<button class="btn--tiny btn--increase-servings">
+						<button data-update-to="${this._data.servings != 1 ? this._data.servings - 1 : 1}" class="btn--tiny btn--update-servings">
 							<svg>
 								<use href="${icons}#icon-minus-circle"></use>
 							</svg>
 						</button>
-						<button class="btn--tiny btn--increase-servings">
+						<button data-update-to="${this._data.servings + 1}" class="btn--tiny btn--update-servings">
 							<svg>
 								<use href="${icons}#icon-plus-circle"></use>
 							</svg>
@@ -90,7 +103,7 @@ class RecipeView extends View {
             <svg class="recipe__icon">
                 <use href="${icons}#icon-check"></use>
             </svg>
-            <div class="recipe__quantity">${ing.quatity ? new Fraction(ing.quantity).toString() : ""}</div>
+            <div class="recipe__quantity">${ing.quantity ? new Fraction(ing.quantity).toString() : ""}</div>
             <div class="recipe__description">
                 <span class="recipe__unit">${ing.unit}</span>
                 ${ing.description}
