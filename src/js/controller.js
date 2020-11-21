@@ -6,19 +6,22 @@ import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
 import resultsView from "./views/resultsView.js";
 import paginationView from "./views/paginationView.js";
+import bookmarksView from "./views/bookmarksView.js";
 
 const controlRecipes = async function () {
     try {
+        // get recipe id
+        const id = window.location.hash.slice(1);
+        if (!id) return;
+
         // render loadig spinner
         recipeView.renderSpinner();
 
-        // get recipe id
-        const id = window.location.hash.slice(1);
-
-        if (!id) return;
-
         // mark current opened recipe as active
         resultsView.update(model.getSearchResultsPage());
+
+        // mark current recipe that is in bookmark list as active in that list
+        bookmarksView.update(model.state.bookmarks);
 
         // load recipe
         await model.loadRecipe(id);
@@ -68,12 +71,15 @@ const controlServings = function (numServings) {
 };
 
 const controlAddBookmark = function () {
-    // Add or remove bookmarks
+    // Add or remove bookmark
     if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
     else model.deleteBookmark(model.state.recipe.id);
 
     // update UI
     recipeView.update(model.state.recipe);
+
+    // render bookmarks
+    bookmarksView.render(model.state.bookmarks);
 };
 
 // Publisher - subscriber pattern. Nicely connect view and controller
