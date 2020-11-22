@@ -98,6 +98,12 @@ const cotrolAddRecipe = async function (newRecipe) {
         // show success message
         addRecipeView.renderMessage();
 
+        // add our recipe bookmarkView
+        bookmarksView.render(model.state.bookmarks);
+
+        // change hash id in url
+        window.history.pushState(null, "", `#${model.state.recipe.id}`);
+
         // hide the form
         setTimeout(function () {
             addRecipeView.toggleWindow();
