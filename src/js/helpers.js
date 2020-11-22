@@ -22,3 +22,27 @@ export const getJSON = async function (url) {
         throw error;
     }
 };
+
+export const sendJSON = async function (url, newRecipe) {
+    try {
+        // get data from API, set timeout for request
+        const res = await Promise.race([
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newRecipe),
+            }),
+            timeout(TIMEOUT_SEC),
+        ]);
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(`${data.message}, ${res.status}`);
+
+        return data;
+    } catch (error) {
+        // rethrow the error
+        throw error;
+    }
+};

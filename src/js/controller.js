@@ -1,12 +1,14 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import * as model from "./model.js";
+import { MODAL_HIDE_TIMEOUT_SEC } from "./config.js";
 
 import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
 import resultsView from "./views/resultsView.js";
 import paginationView from "./views/paginationView.js";
 import bookmarksView from "./views/bookmarksView.js";
+import addRecipeView from "./views/addRecipeView.js";
 
 const controlRecipes = async function () {
     try {
@@ -86,6 +88,25 @@ const controlBookmarks = function () {
     bookmarksView.render(model.state.bookmarks);
 };
 
+const cotrolAddRecipe = async function (newRecipe) {
+    try {
+        await model.uploadRecipe(newRecipe);
+
+        // render newly added recipe
+        recipeView.render(model.state.recipe);
+
+        // show success message
+        addRecipeView.renderMessage();
+
+        // hide the form
+        setTimeout(function () {
+            addRecipeView.toggleWindow();
+        }, MODAL_HIDE_TIMEOUT_SEC * 1000);
+    } catch (error) {
+        addRecipeView.renderError(error.message);
+    }
+};
+
 // Publisher - subscriber pattern. Nicely connect view and controller
 const init = function () {
     bookmarksView.addHandlerRender(controlBookmarks);
@@ -94,5 +115,6 @@ const init = function () {
     recipeView.addHandlerBookamrk(controlAddBookmark);
     searchView.addHandlerSearch(controlSearchResults);
     paginationView.addHandlerClick(controlChangePage);
+    addRecipeView.addHandlerUpload(cotrolAddRecipe);
 };
 init();
