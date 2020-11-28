@@ -1,2 +1,3 @@
 # JavaScriptLearning
-My JS learning proces is here 
+This branch contains some basics of async JS. 
+For learning purposes.
