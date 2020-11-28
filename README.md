@@ -1,2 +1,2 @@
 # JavaScriptLearning
-My JS learning proces is here 
+This branch contains some learning tasks and free use of methods and so on.
