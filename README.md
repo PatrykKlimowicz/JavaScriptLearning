@@ -1,2 +1,3 @@
 # JavaScriptLearning
-My JS learning proces is here 
+This branch contains some basic, mini-projects. 
+This help me learn basics of JS language.
